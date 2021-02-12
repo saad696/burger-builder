@@ -14,32 +14,40 @@ const INGREDIENT_PRICES = {
 export default class BurgerBuilder extends Component {
   state = {
     ingredients: {
-      salad: 0,
       cheese: 0,
       bacon: 0,
       meat: 0,
+      salad: 0,
     },
     price: 4,
     purchaseable: false,
-    purchasing: false
+    purchasing: false,
   };
 
   purchasingHandler = () => {
-    this.setState({purchasing: true})
-  }
+    this.setState({ purchasing: true });
+  };
 
   cancelPurchaseHandler = () => {
-    this.setState({purchasing: false})
-  }
+    this.setState({ purchasing: false });
+  };
+
+  continuePurschaseHandler = () => {
+    alert("Forwarding...");
+  };
 
   isPurchaseable = (ingreds) => {
-    const sum = Object.keys(ingreds).map(ingKey => {
-      return ingreds[ingKey]
-    }).reduce((sum, el) => { return sum + el });
+    const sum = Object.keys(ingreds)
+      .map((ingKey) => {
+        return ingreds[ingKey];
+      })
+      .reduce((sum, el) => {
+        return sum + el;
+      });
 
-    this.setState({purchaseable: sum > 0});
-    console.log(this.state.purchaseable)
-  }
+    this.setState({ purchaseable: sum > 0 });
+    console.log(this.state.purchaseable);
+  };
 
   addIngredientsHandler = (type) => {
     const updatedCount = this.state.ingredients[type] + 1;
@@ -81,11 +89,19 @@ export default class BurgerBuilder extends Component {
 
     return (
       <Aux>
-        <Modal modal={this.state.purchasing} cancel={this.cancelPurchaseHandler}>
-          <OrderSummary ingreds={this.state.ingredients} total={this.state.price}/>
-          </Modal>
+        <Modal
+          modal={this.state.purchasing}
+          cancel={this.cancelPurchaseHandler}
+        >
+          <OrderSummary
+            ingreds={this.state.ingredients}
+            total={this.state.price}
+            cancelPurchase={this.cancelPurchaseHandler}
+            continuePurchase={this.continuePurschaseHandler}
+          />
+        </Modal>
         <Burger ingredients={this.state.ingredients} />
-        <BuildControls 
+        <BuildControls
           updatedIngreds={this.addIngredientsHandler}
           deductedIngreds={this.deductIngredientsHandler}
           price={this.state.price.toPrecision(3)}

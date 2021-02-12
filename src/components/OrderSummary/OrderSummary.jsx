@@ -1,5 +1,6 @@
 import React from "react";
 import Aux from "../../hoc/Auxilary";
+import Button from "../UI/Button/Button";
 
 const OrderSummary = (props) => {
   const orderSum = Object.keys(props.ingreds).map((ingkey) => {
@@ -19,12 +20,14 @@ const OrderSummary = (props) => {
       <p>A delicious burger with following ingredients:</p>
       <ul>{orderSum}</ul>
       <hr />
-      <span style={{ textAlign: "center" }}>
+      <span className="has-text-centered">
         <p>Proceed to checkout?</p>
         <p>
-          Total: {props.total}
+          Total: {props.total.toPrecision(3)}
           <sup>$</sup>
         </p>
+        <Button clicked={props.cancelPurchase} btnTypes="Danger">Cancel</Button>
+        <Button clicked={props.continuePurchase} btnTypes="Success">Continue</Button>
       </span>
     </Aux>
   );
