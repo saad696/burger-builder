@@ -1,8 +1,20 @@
-.Logo{
-    background-color: #fff;
-    height: 100%;
+.Logo {
+  background-color: #fff;
+  border: none;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 0px 7px;
+  
 }
 
 .Logo img {
-    height: 100%;
+  height: 100%;
+}
+
+@media(min-width: 499px){
+  .Logo{
+    position: absolute;
+    margin: 46%;
+  }
 }

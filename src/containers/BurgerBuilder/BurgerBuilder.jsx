@@ -46,7 +46,7 @@ export default class BurgerBuilder extends Component {
       });
 
     this.setState({ purchaseable: sum > 0 });
-    console.log(this.state.purchaseable);
+    //console.log(this.state.purchaseable);
   };
 
   addIngredientsHandler = (type) => {
